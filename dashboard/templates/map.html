@@ -1,0 +1,70 @@
+{% load static %}
+<html>
+
+<head>
+  <title>{{ title }}</title>
+  <link rel="shortcut icon" type="image/png" href="{% static "favicon/map-marker.png" %}"/>
+  <script>
+    window.campsGeoJsonUrl = '{% url "camps_geojson" %}';
+    window.hazardsGeoJsonUrl = '{% url "hazards_geojson" %}';
+    window.peopleGeoJsonUrl = '{% url "people_geojson" %}';
+    window.addHazardUrl = '{% url "add_hazard_area" %}';
+    window.addPersonUrl = '{% url "add_rescue_area" %}';
+    window.apiKey = '{{ api_key }}';
+    window.mapCenter = {{ center | safe }};
+    window.imagePath = '{% static "img/" %}';
+  </script>
+  <script src="{% static "js/markerclusterer.js" %}"></script>  
+  <script src="{% static "js/app.js" %}"></script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}&libraries=visualization,places&callback=initMap"></script>
+  <link rel="stylesheet" href="{% static "css/style.css" %}">
+  <head>
+
+  <body>
+    <div class="flexbox-container">
+    <div id="map"></div>
+    <div id="right-panel"></div>
+    </div>
+    <div class=ghost>
+    <div id="infowindow-content">
+        <img id="place-img" src="">
+        <h5 id="place-address"></h2>
+        <p id="place-description"></p>
+        <li id="place-capacity"></li>
+        <li id="place-water"></li>
+        <li id="place-food"></li>
+        <li id="place-medicine"></li>
+    </div>
+    <div id="select-form-type">
+      <table>
+      <tr><td>Location type:</td> <td><select id='type'> +
+        <option value='hazard' SELECTED>Hazard Area</option>
+        <option value='need-rescue'>Need Rescue</option>
+        </select> </td></tr>
+        <tr><td></td><td><input id="form-button" type='button' value='Proceed'/></td></tr>
+      </table>    
+    </div>   
+    <div id="hazard-form">
+        <table>
+        <tr><td>Description:</td> <td><input type='text' id='description'/> </td> </tr>
+        <tr><td></td><td><input id="form-button" type='button' value='Save'/></td></tr>
+        </table>
+    </div>
+    <div id="rescue-form">
+      <table>
+      <tr><td>Name:</td> <td><input type='text' id='name' required/> </td> </tr>
+      <tr><td>Phone:</td> <td><input type="tel" id="phone"
+                                      placeholder="0123456789"
+                                      pattern="[0-9]{10}"
+                                      required /></td> </tr>
+      <tr><td>Friend's Name:</td> <td><input type='text' id='friend-name'/> </td> </tr>
+      <tr><td>Friend's Phone:</td> <td><input type="tel" id="friend-phone"
+                                      placeholder="0123456789"
+                                      pattern="[0-9]{10}" /></td> </tr>
+      <tr><td></td><td><input id="form-button" type='button' value='Save'/></td></tr>
+      </table>
+  </div>
+    <div id="message">Location saved</div>
+  </div>
+  </body>
+</html>

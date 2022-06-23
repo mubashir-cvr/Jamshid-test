@@ -1,0 +1,48 @@
+.flexbox-container{
+    display: flex;
+    flex-direction: row;
+    min-height: 100%;
+}
+
+#map {
+    flex: 1 1 100%;
+}
+
+.map-loading {
+    opacity: .3;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+#right-panel {
+    font-family: 'Roboto', 'sans-serif';
+    line-height: 30px;
+    padding-left: 10px;
+}
+
+#right-panel select,
+#right-panel input {
+    font-size: 15px;
+}
+
+#right-panel select {
+    width: 100%;
+}
+
+#right-panel i {
+    font-size: 12px;
+}
+
+#right-panel {
+    flex: 1 1 0%;
+}
+
+.ghost {
+    display: none;
+}
